@@ -18,6 +18,15 @@ const linksData = [
     username: 'viewer',
     password: 'viewer-pass',
   },
+  ,
+  {
+    id: 2,
+    name: 'Grafana Dashboard',
+    url: 'https://grafana.example.com',
+    loginUrl: 'https://grafana.example.com/login',
+    username: 'viewer',
+    password: 'viewer-pass',
+  },
 ]
 
 function CopyButton({ text, label }) {
