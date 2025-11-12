@@ -1,0 +1,178 @@
+body {
+  font-family: Inter, system-ui, Segoe UI, Roboto, Arial;
+  background: #f6f8fb;
+  color: #0b1220;
+  margin: 16px;
+}
+
+.wrap {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 12px;
+}
+
+h1 {
+  margin: 0 0 8px;
+  font-size: 24px;
+}
+
+p.lead {
+  color: #465;
+  opacity: 0.9;
+  margin: 0 0 16px;
+  font-size: 16px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background: white;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 6px 18px rgba(20, 30, 40, 0.06);
+  margin-top: 20px;
+}
+
+th,
+td {
+  padding: 12px 10px;
+  border-bottom: 1px solid #eef2f6;
+  text-align: left;
+  font-size: 16px;
+  word-break: break-word;
+}
+
+thead th {
+  background: #0f1724;
+  color: #fff;
+  font-weight: 600;
+}
+
+tbody tr:last-child td {
+  border-bottom: none;
+}
+
+a.link {
+  color: #0b74ff;
+  text-decoration: none;
+  word-break: break-all;
+}
+
+.mono {
+  font-family: ui-monospace, Menlo, Consolas, monospace;
+  background: #f3f6fb;
+  padding: 4px 6px;
+  border-radius: 4px;
+  display: inline-block;
+  word-break: break-all;
+}
+
+.copy-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.copy-btn {
+  background: #f3f6fb;
+  border: 1px solid #d0dae6;
+  border-radius: 4px;
+  padding: 4px 8px;
+  cursor: pointer;
+  font-size: 12px;
+  color: #556;
+  transition: all 0.2s;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.copy-btn:hover {
+  background: #e8ecf1;
+  border-color: #b8c5d3;
+  color: #334;
+}
+
+.copy-btn:active {
+  transform: scale(0.95);
+}
+
+.copy-btn.copied {
+  background: #d4edda;
+  border-color: #c3e6cb;
+  color: #155724;
+}
+
+.actions {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.btn {
+  padding: 6px 10px;
+  border-radius: 6px;
+  border: 1px solid #d0dae6;
+  background: #fff;
+  cursor: pointer;
+  text-decoration: none;
+  font-size: 14px;
+}
+
+.btn.open {
+  background: #0b74ff;
+  color: #fff;
+  border: none;
+}
+
+caption {
+  padding: 10px 0;
+  font-size: 14px;
+  color: #556;
+  text-align: left;
+}
+
+small.note {
+  display: block;
+  margin-top: 10px;
+  color: #667;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  table,
+  thead,
+  tbody,
+  th,
+  td,
+  tr {
+    display: block;
+    width: 100%;
+  }
+  thead {
+    display: none;
+  }
+  tr {
+    margin-bottom: 16px;
+    border: 1px solid #e1e5eb;
+    border-radius: 8px;
+    background: #fff;
+    box-shadow: 0 3px 8px rgba(20, 30, 40, 0.05);
+  }
+  td {
+    border: none;
+    padding: 8px 12px;
+  }
+  td::before {
+    content: attr(data-label) ": ";
+    font-weight: 600;
+    color: #334;
+    display: inline-block;
+    min-width: 120px;
+  }
+  .actions {
+    margin-top: 6px;
+  }
+}
+
