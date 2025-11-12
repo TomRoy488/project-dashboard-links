@@ -21,7 +21,7 @@ const linksData = [
   ,
   {
     id: 2,
-    name: 'Grafana Dashboard',
+    name: 'Grafana Dashboard link',
     url: 'https://grafana.example.com',
     loginUrl: 'https://grafana.example.com/login',
     username: 'viewer',
