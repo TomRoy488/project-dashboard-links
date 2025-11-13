@@ -1,33 +1,29 @@
-import { useState } from 'react'
+import { useMemo, useState } from 'react'
+import CryptoJS from 'crypto-js'
 import './App.css'
 
-const linksData = [
-  {
-    id: 1,
-    name: 'AyurCentral Admin',
-    url: 'https://admin.ayurcentral.in',
-    loginUrl: 'https://admin.ayurcentral.in/login',
-    username: 'admin@ayurcentral.in',
-    password: 'P@ssw0rd123',
-  },
-  {
-    id: 2,
-    name: 'Grafana Dashboard',
-    url: 'https://grafana.example.com',
-    loginUrl: 'https://grafana.example.com/login',
-    username: 'viewer',
-    password: 'viewer-pass',
-  },
-  ,
-  {
-    id: 2,
-    name: 'Grafana Dashboard link',
-    url: 'https://grafana.example.com',
-    loginUrl: 'https://grafana.example.com/login',
-    username: 'viewer',
-    password: 'viewer-pass',
-  },
-]
+const encryptedLinksData =
+  'U2FsdGVkX18wLdqT4nNnhp/OqI/5tbS/fElJuT9/HWo6W9v6XkXHaCfqTuHMgXeBzkAXpWX0jCibJ+WFs6l+kJgRmvlBp8MwqfhyAcJSKUFrw1ht0JwL3fQkNu9VTaL9An2Xz9GOfRm10RF1bd58B695MGE8OECDyj0sbRz4R5UI3qATGbgVIPz1Dm3OQaaGD/iYtxnrWkx97XMvttQ92Qw/7NRU5z8YCqJJpsUbjdVO3kOuczRIm0EvL8Qn1/zlzwnaBATC9q93n1Qex5Atv65GvzHmESAmpVS62CtYMc0d0xtWYc2bqP33ZRgl1WNxXtOx2vt75piFMTF0f3fwxm3Nx91LQ+trmSrVcLcX7QwjXF8ry8/k0kuFLKHlw70FyMSONAFCtCui3Ku5G+Zj2nwuxkYLWyvJHMo9DDNjZTDbsiw4Vlo79sjnrmnapFD3PzHirKvB1t5gVLUrSr1jkiFCZ9OWC8VTjlEvOAXgsDYodKf6F19QXRxpO4HLrNtlSTYuwKAuOqot9Vn7V31F6X5jH9R42vO0v4J8Jzqb8aXG+gMjNRZydz356qppFSGlpz8cmCiyT4V3FEKN4Lnue1do2JFHH+lBeuWiXTxb9/xEz8N2cj2XIduWHG+Pn5oMdLNOCTzwf3xHCBMm0wmgWxClwDGRn/UrKkG1Quk5opVaUS0rj8dTF79WqXOnF6brFnan32tBaHBc5zDS0FUCyQ=='
+
+function retrieveLinks(accessKey) {
+  if (!accessKey) {
+    return null
+  }
+
+  try {
+    const bytes = CryptoJS.AES.decrypt(encryptedLinksData, accessKey)
+    const decoded = bytes.toString(CryptoJS.enc.Utf8)
+
+    if (!decoded) {
+      return null
+    }
+
+    const parsed = JSON.parse(decoded)
+    return Array.isArray(parsed) ? parsed : null
+  } catch (error) {
+    return null
+  }
+}
 
 function CopyButton({ text, label }) {
   const [copied, setCopied] = useState(false)
@@ -70,6 +66,14 @@ function CopyButton({ text, label }) {
 }
 
 function App() {
+  const accessKey =
+    typeof window !== 'undefined' ? window.localStorage.getItem('auth_key') : null
+  const linksData = useMemo(() => retrieveLinks(accessKey), [accessKey])
+
+  if (!linksData) {
+    return null
+  }
+
   return (
     <div className="wrap">
       <h1>Project & Dashboard Links</h1>

@@ -8,7 +8,14 @@ export default function PasswordGate({ children }) {
   const [entryField, setEntryField] = useState('');
 
   useEffect(() => {
-    if (typeof window !== 'undefined' && window.localStorage.getItem('auth_perm') === '1') {
+    if (typeof window === 'undefined') {
+      return;
+    }
+
+    const cachedPermit = window.localStorage.getItem('auth_perm');
+    const cachedKey = window.localStorage.getItem('auth_key');
+
+    if (cachedPermit === '1' && cachedKey) {
       setIsCleared(true);
     }
   }, []);
@@ -19,8 +26,11 @@ export default function PasswordGate({ children }) {
 
     if (computed === STORED_DIGEST) {
       window.localStorage.setItem('auth_perm', '1');
+      window.localStorage.setItem('auth_key', entryField);
       setIsCleared(true);
+      setEntryField('');
     } else {
+      window.localStorage.removeItem('auth_key');
       window.alert('Incorrect entry. Please try again.');
       setEntryField('');
     }
