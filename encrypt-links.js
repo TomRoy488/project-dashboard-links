@@ -25,6 +25,14 @@ const rawLinksData = [
     username: 'viewer',
     password: 'viewer-pass',
   },
+  {
+    id: 4,
+    name: 'Grafana Dashboard link',
+    url: 'https://grafana.example.com',
+    loginUrl: 'https://grafana.example.com/login',
+    username: 'viewernew',
+    password: 'viewer-pass',
+  },
 ];
 
 const ACCESS_KEY = 'AyurDashb0ard2o25@';
